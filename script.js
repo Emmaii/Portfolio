@@ -1,5 +1,4 @@
 (function() {
-  // Footer Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Typing Animation
@@ -32,37 +31,44 @@
   }
   setTimeout(typeEffect, 800);
 
-  // Counter
+  // COUNTER – Only starts when you scroll to the section
+  const counterBox = document.getElementById('counterSection');
   const counterEl = document.getElementById('subscriberCounter');
-  if (counterEl) {
-    let current = 0;
-    const target = 57;
-    const step = Math.ceil(target / 50);
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= target) {
-        counterEl.textContent = '57+';
-        clearInterval(timer);
-      } else {
-        counterEl.textContent = current;
-      }
-    }, 50);
+  let counterStarted = false;
+
+  if (counterBox && counterEl) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !counterStarted) {
+          counterStarted = true;
+          let current = 0;
+          const target = 57;
+          const step = Math.ceil(target / 50);
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              counterEl.textContent = '57+';
+              clearInterval(timer);
+            } else {
+              counterEl.textContent = current;
+            }
+          }, 50);
+          observer.disconnect(); // Stop observing once started
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(counterBox);
   }
 
-  // Buy Button Logic
+  // Buy Button Logic (Instagram DM + Copy Message)
   const buyBtn = document.getElementById('buyBookBtn');
   if (buyBtn) {
     buyBtn.addEventListener('click', function() {
-      // 1. Copy message to clipboard
       const msg = "Hi, I want to get this book so I can join the next batch of students.";
       navigator.clipboard.writeText(msg).then(() => {
-        // 2. Open Instagram DM
         const igUrl = "https://www.instagram.com/emmanuelsilaskelechi?igsh=b282cGxsa3d3Zjgy&utm_source=qr";
         window.open(igUrl, '_blank');
-        // Optional: Alert user that text was copied
-        // alert("Message copied to clipboard! Paste it on Instagram.");
       }).catch(() => {
-        // Fallback if clipboard fails
         const igUrl = "https://www.instagram.com/emmanuelsilaskelechi?igsh=b282cGxsa3d3Zjgy&utm_source=qr";
         window.open(igUrl, '_blank');
         alert("Please send this message: \n\n" + msg);
@@ -70,7 +76,7 @@
     });
   }
 
-  // Lecture List (Gift Content) + Watch & Assignment Buttons
+  // Lecture List + Watch & Assignment Buttons
   const lectures = [
     { title: 'Market Structure & Bias', videoId: 'RraPVl3lPg0' },
     { title: 'Timing the Session', videoId: 'bI4NIjkAC34' },
@@ -82,13 +88,13 @@
 
   const container = document.getElementById('lectureList');
   if (container) {
-    container.innerHTML = lectures.map((l, i) => `
+    container.innerHTML = lectures.map((l) => `
       <div class="lecture-item">
         <div>
           <div class="lecture-title">${l.title}</div>
           <div class="lecture-meta">Gold Technicals</div>
         </div>
-        <div style="display:flex; gap:6px;">
+        <div class="lecture-actions">
           <button class="btn-assignment" data-title="${l.title}">Assignment</button>
           <button class="btn-watch" data-video="${l.videoId}">Watch</button>
         </div>
@@ -115,7 +121,7 @@
     });
   }
 
-  // Intersection Observer for reveals
+  // Section Reveal Observer
   const hiddenEls = document.querySelectorAll('.section-hidden');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -126,4 +132,4 @@
     });
   }, { threshold: 0.2 });
   hiddenEls.forEach(el => observer.observe(el));
-})();
+})()
