@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LabRoom — Institutional Trading Framework</title>
+  <meta name="description" content="The Institutional Trading Framework by LabRoom. Learn stocks, crypto, and commodities. Book + Free Batch." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="brand">
+        <img src="assets/labroom%20logo.jpg" alt="LabRoom" class="brand-logo" />
+        <div>
+          <div class="brand-name">LabRoom</div>
+          <div class="brand-sub">Institutional Framework</div>
+        </div>
+      </div>
+      <a href="https://t.me/Lab_ACAD" target="_blank" class="top-cta">Join Telegram</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>
+        <span class="highlight">Read markets.</span><br />
+        <span class="highlight">Follow capital.</span><br />
+        <span class="highlight">Manage risk.</span>
+      </h1>
+      <p class="tagline">
+        Institutional framework for Stocks, Crypto, and Commodities.<br />
+        No predictions. Just process.
+      </p>
+      <div class="typing-line" id="typingLine"></div>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-gold">Get the Book</a>
+        <a href="https://t.me/Lab_ACAD" target="_blank" class="btn btn-outline">Join Free Batch</a>
+      </div>
+      <div class="social">
+        <a href="https://www.instagram.com/emmanuelsilaskelechi" target="_blank">Instagram</a>
+        <a href="https://youtube.com/@lab_room" target="_blank">YouTube</a>
+        <a href="https://x.com/labroom_" target="_blank">X</a>
+      </div>
+    </section>
+
+    <!-- 6-STEP FRAMEWORK -->
+    <section class="framework section-hidden" id="framework">
+      <div class="section-title">
+        <h2>The LABROOM Sequence</h2>
+        <p>Six steps. Repeatable. Institutional.</p>
+      </div>
+      <div class="framework-steps">
+        <div class="step-card"><span class="step-icon">🌍</span><div class="step-label">Environment</div><div class="step-desc">Risk-On or Risk-Off?</div></div>
+        <div class="step-card"><span class="step-icon">💰</span><div class="step-label">Capital Flow</div><div class="step-desc">Where is money moving?</div></div>
+        <div class="step-card"><span class="step-icon">📋</span><div class="step-label">Thesis</div><div class="step-desc">If… then… because…</div></div>
+        <div class="step-card"><span class="step-icon">🛡️</span><div class="step-label">Risk</div><div class="step-desc">Size before reward</div></div>
+        <div class="step-card"><span class="step-icon">⚡</span><div class="step-label">Execution</div><div class="step-desc">Confirm & enter</div></div>
+        <div class="step-card"><span class="step-icon">📝</span><div class="step-label">Review</div><div class="step-desc">Journal & improve</div></div>
+      </div>
+    </section>
+
+    <!-- COUNTER -->
+    <div class="counter-box section-hidden">
+      <div class="counter-number" id="subscriberCounter">0</div>
+      <div class="counter-label">Traders learning institutionally</div>
+    </div>
+
+    <!-- BOOK + BATCH SECTION -->
+    <section class="book section-hidden" id="book">
+      <div class="book-grid">
+        <div class="book-covers">
+          <div class="book-cover-placeholder">
+            <strong>Front Cover</strong>
+            <span>Add image: assets/book-front.jpg</span>
+          </div>
+          <div class="book-cover-placeholder">
+            <strong>Back Cover</strong>
+            <span>Add image: assets/book-back.jpg</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <h2>The Institutional Trading Framework</h2>
+          <p style="color:#8891a5; margin-bottom:4px;">by LabRoom</p>
+          <div class="price">13,000 Naira</div>
+          <p style="margin-bottom:12px;">E-book (PDF). Immediate access.</p>
+          
+          <div class="offer">
+            <p><strong>Buy the book → Join the Student Batch (Free).</strong></p>
+            <p style="font-size:0.85rem; margin-top:6px; color:#d0d4dd;">
+              Learn Stocks, Crypto, and Commodities through live Zoom sessions, practical application, and hand-holding — using the book as your curriculum. <em>No Forex.</em>
+            </p>
+          </div>
+
+          <div class="book-actions">
+            <button class="btn btn-gold" id="buyBookBtn" style="font-size:0.9rem; width:100%;">Buy Now (13,000 NGN)</button>
+            <a href="https://t.me/Lab_ACAD" target="_blank" class="btn btn-outline" style="font-size:0.9rem; text-align:center; width:100%;">Go to Batch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE EDUCATIONAL GIFT (Gold Technicals) -->
+    <section class="gift-section section-hidden">
+      <div class="section-title">
+        <h2>Free Educational Content</h2>
+        <p style="color: #8891a5; font-size: 0.9rem;">Technical analysis on Gold — a gift, not the LabRoom framework.</p>
+      </div>
+      <div class="lecture-list" id="lectureList"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>© <span id="year"></span> LabRoom. Educational content only. Trading involves risk.</p>
+    </footer>
+  </div>
+
+  <!-- FLOATING TELEGRAM -->
+  <a href="https://t.me/Lab_ACAD" target="_blank" class="float-telegram">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.87 4.326-2.96-.924c-.642-.203-.658-.642.136-.953l11.566-4.458c.538-.196 1.006.128.832.938z"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
