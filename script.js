@@ -61,13 +61,44 @@
     observer.observe(counterBox);
   }
 
+  // Price countdown animation (from 100,000 to 13,000)
+  const priceElement = document.getElementById('animatedPrice');
+  let priceAnimated = false;
+
+  if (priceElement) {
+    const priceObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !priceAnimated) {
+          priceAnimated = true;
+          let start = 100000;
+          const end = 13000;
+          const duration = 1500; // ms
+          const stepTime = 20;
+          const steps = duration / stepTime;
+          const decrement = (start - end) / steps;
+          let current = start;
+          const timer = setInterval(() => {
+            current -= decrement;
+            if (current <= end) {
+              priceElement.textContent = '13,000 NGN';
+              clearInterval(timer);
+            } else {
+              priceElement.textContent = Math.floor(current).toLocaleString() + ' NGN';
+            }
+          }, stepTime);
+          priceObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    priceObserver.observe(priceElement);
+  }
+
   // Buy button: copy message, show toast, open Instagram
   const buyBtn = document.getElementById('buyBookBtn');
   if (buyBtn) {
     buyBtn.addEventListener('click', () => {
       const message = "Hi, I'd like to join the free batch. Please guide me on purchasing the book.";
       navigator.clipboard.writeText(message).then(() => {
-        // Toast notification
         const toast = document.createElement('div');
         toast.textContent = '✓ Message copied. Please paste it in Instagram DM.';
         toast.style.position = 'fixed';
@@ -88,7 +119,6 @@
       }).catch(() => {
         alert("Please copy this message:\n\n" + message);
       });
-      // Open Instagram profile
       window.open("https://www.instagram.com/emmanuelsilaskelechi?igsh=b282cGxsa3d3Zjgy&utm_source=qr", "_blank");
     });
   }
