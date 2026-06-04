@@ -61,15 +61,15 @@
     observer.observe(counterBox);
   }
 
-  // Buy button: copy message, open Instagram, show notification
+  // Buy button: copy message, show toast, open Instagram
   const buyBtn = document.getElementById('buyBookBtn');
   if (buyBtn) {
     buyBtn.addEventListener('click', () => {
       const message = "Hi, I'd like to join the free batch. Please guide me on purchasing the book.";
       navigator.clipboard.writeText(message).then(() => {
-        // Show a small non-intrusive notification
+        // Toast notification
         const toast = document.createElement('div');
-        toast.textContent = '✓ Message copied. Paste it in Instagram DM.';
+        toast.textContent = '✓ Message copied. Please paste it in Instagram DM.';
         toast.style.position = 'fixed';
         toast.style.bottom = '80px';
         toast.style.left = '50%';
@@ -82,10 +82,10 @@
         toast.style.zIndex = '1000';
         toast.style.border = '1px solid #5a8bc9';
         toast.style.backdropFilter = 'blur(8px)';
+        toast.style.whiteSpace = 'nowrap';
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 3000);
       }).catch(() => {
-        // Fallback if clipboard fails
         alert("Please copy this message:\n\n" + message);
       });
       // Open Instagram profile
