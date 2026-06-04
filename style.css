@@ -10,8 +10,8 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #0a0d14;
-  color: #eef0f4;
+  background: #0a1a2f;  /* deep navy */
+  color: #eef2f8;
   line-height: 1.5;
   overflow-x: hidden;
 }
@@ -53,31 +53,42 @@ img {
   height: 36px;
   border-radius: 8px;
   object-fit: cover;
-  background: #c9a94e;
+  background: #1e3a5f;
 }
 
 .brand-name {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+}
+
+.brand-name .lab {
+  color: #4a7cbb;  /* lighter navy-blue for LAB */
+}
+
+.brand-name .room {
+  color: #a0aab5;   /* silver/grey */
 }
 
 .brand-sub {
-  font-size: 0.75rem;
-  color: #8891a5;
+  font-size: 0.65rem;
+  color: #7e8c9e;
+  letter-spacing: 1px;
 }
 
 .top-cta {
   padding: 8px 18px;
   border-radius: 999px;
-  border: 1px solid rgba(201, 169, 78, 0.3);
-  color: #f0df94;
+  border: 1px solid #4a7cbb;
+  color: #c0d0e6;
   font-weight: 600;
   font-size: 0.8rem;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .top-cta:hover {
-  background: rgba(201, 169, 78, 0.1);
+  background: rgba(74, 124, 187, 0.15);
+  border-color: #a0aab5;
 }
 
 /* Hero */
@@ -91,24 +102,25 @@ img {
   font-weight: 600;
   line-height: 1.1;
   margin-bottom: 12px;
+  color: #ffffff;
 }
 
 .hero .tagline {
-  color: #8891a5;
+  color: #a0b3cc;
   font-size: 1.1rem;
   margin: 0 auto 18px;
 }
 
 .hero .highlight {
-  color: #c9a94e;
+  color: #7e9bc9;
 }
 
 .typing-line {
   font-weight: 500;
-  color: #f0df94;
+  color: #c0d0e6;
   min-height: 2.2rem;
   font-size: 1.1rem;
-  border-right: 2px solid #c9a94e;
+  border-right: 2px solid #7e9bc9;
   display: inline-block;
   padding-right: 8px;
   animation: blink 0.8s step-end infinite;
@@ -140,22 +152,24 @@ img {
 }
 
 .btn-gold {
-  background: #c9a94e;
-  color: #0d0f13;
+  /* Renamed but keep class for compatibility – now silver */
+  background: #3a5a7a;
+  color: #ffffff;
 }
 
 .btn-gold:hover {
-  background: #dab85e;
+  background: #4a6e94;
 }
 
 .btn-outline {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #eef0f4;
+  border: 1px solid #5a7a9a;
+  color: #eef2f8;
 }
 
 .btn-outline:hover {
-  border-color: #8891a5;
+  border-color: #a0aab5;
+  background: rgba(160, 170, 181, 0.1);
 }
 
 .social {
@@ -166,19 +180,19 @@ img {
 }
 
 .social a {
-  color: #8891a5;
+  color: #7e8c9e;
   font-size: 0.8rem;
   transition: color 0.2s;
 }
 
 .social a:hover {
-  color: #fff;
+  color: #c0d0e6;
 }
 
 /* Scam warning box */
 .warning-box {
-  background: rgba(201, 169, 78, 0.05);
-  border-left: 4px solid #c9a94e;
+  background: rgba(30, 58, 95, 0.4);
+  border-left: 4px solid #7e9bc9;
   padding: 14px 20px;
   border-radius: 12px;
   margin: 20px auto;
@@ -188,12 +202,12 @@ img {
 }
 
 .warning-box strong {
-  color: #f0df94;
+  color: #c0d0e6;
   font-weight: 700;
 }
 
 .warning-box a {
-  color: #f0df94;
+  color: #7e9bc9;
   text-decoration: underline;
 }
 
@@ -210,10 +224,11 @@ img {
 .framework .section-title h2 {
   font-weight: 600;
   font-size: 1.4rem;
+  color: #ffffff;
 }
 
 .framework .section-title p {
-  color: #8891a5;
+  color: #a0b3cc;
   font-size: 0.9rem;
   margin-top: 6px;
 }
@@ -226,10 +241,10 @@ img {
 }
 
 .step-card {
-  background: rgba(17, 22, 29, 0.6);
+  background: rgba(20, 52, 84, 0.6);
   border-radius: 14px;
   padding: 16px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(90, 122, 154, 0.3);
 }
 
 .step-icon {
@@ -241,11 +256,11 @@ img {
 .step-label {
   font-weight: 600;
   font-size: 0.8rem;
-  color: #c9a94e;
+  color: #7e9bc9;
 }
 
 .step-desc {
-  color: #8891a5;
+  color: #a0b3cc;
   font-size: 0.7rem;
   margin-top: 4px;
 }
@@ -268,19 +283,19 @@ img {
   margin: 20px 0 40px;
   padding: 16px;
   border-radius: 14px;
-  border: 1px solid rgba(201, 169, 78, 0.12);
-  background: rgba(17, 22, 29, 0.4);
+  border: 1px solid #2a4a6e;
+  background: rgba(20, 52, 84, 0.5);
 }
 
 .counter-number {
   font-size: 3rem;
   font-weight: 700;
-  color: #f0df94;
+  color: #7e9bc9;
   line-height: 1;
 }
 
 .counter-label {
-  color: #8891a5;
+  color: #a0b3cc;
   font-size: 0.8rem;
   margin-top: 4px;
 }
@@ -309,7 +324,7 @@ img {
   height: auto;
   border-radius: 8px;
   object-fit: cover;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid #2a4a6e;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -317,30 +332,31 @@ img {
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 10px;
+  color: #ffffff;
 }
 
 .book-info .price {
   font-size: 1.8rem;
-  color: #f0df94;
+  color: #7e9bc9;
   font-weight: 700;
   margin: 6px 0 12px;
 }
 
 .book-info .offer {
-  background: rgba(201, 169, 78, 0.08);
+  background: rgba(30, 58, 95, 0.3);
   padding: 14px 18px;
   border-radius: 12px;
-  border-left: 3px solid #c9a94e;
+  border-left: 3px solid #7e9bc9;
   margin: 16px 0;
 }
 
 .book-info .offer p {
   font-size: 0.9rem;
-  color: #eef0f4;
+  color: #eef2f8;
 }
 
 .book-info .offer strong {
-  color: #f0df94;
+  color: #c0d0e6;
 }
 
 .book-actions {
@@ -373,6 +389,7 @@ img {
 .gift-section .section-title h2 {
   font-size: 1.2rem;
   font-weight: 600;
+  color: #ffffff;
 }
 
 .lecture-list {
@@ -388,8 +405,8 @@ img {
   align-items: center;
   padding: 14px 18px;
   border-radius: 12px;
-  background: rgba(17, 22, 29, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(20, 52, 84, 0.5);
+  border: 1px solid #2a4a6e;
   gap: 10px;
 }
 
@@ -399,10 +416,11 @@ img {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #eef2f8;
 }
 
 .lecture-meta {
-  color: #8891a5;
+  color: #7e8c9e;
   font-size: 0.8rem;
   white-space: nowrap;
 }
@@ -425,23 +443,23 @@ img {
 }
 
 .btn-watch {
-  border: 1px solid rgba(201, 169, 78, 0.2);
+  border: 1px solid #4a7cbb;
   background: transparent;
-  color: #f0df94;
+  color: #c0d0e6;
 }
 
 .btn-watch:hover {
-  background: rgba(201, 169, 78, 0.1);
+  background: rgba(74, 124, 187, 0.2);
 }
 
 .btn-assignment {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #5a6a7a;
   background: transparent;
-  color: #8891a5;
+  color: #a0b3cc;
 }
 
 .btn-assignment:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(160, 170, 181, 0.1);
 }
 
 /* Mobile Tweak for Lecture Items */
@@ -461,12 +479,12 @@ img {
 
 /* Footer */
 .footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid #1e3a5f;
   padding: 20px 0;
   margin-top: 40px;
   text-align: center;
   font-size: 0.75rem;
-  color: #5c6577;
+  color: #5a6a7a;
 }
 
 /* Utility */
