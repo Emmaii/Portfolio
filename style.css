@@ -323,11 +323,24 @@ body {
   margin-bottom: 12px;
 }
 
+.price-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.old-price {
+  font-size: 1.2rem;
+  color: #7e8c9e;
+  text-decoration: line-through;
+}
+
 .price {
   font-size: 2rem;
   font-weight: 700;
   color: #7e9bc9;
-  margin-bottom: 12px;
 }
 
 .book-note {
@@ -476,5 +489,8 @@ body {
   }
   .steps-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .price-wrapper {
+    justify-content: center;
   }
 }
