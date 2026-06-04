@@ -1,25 +1,25 @@
 (function() {
-  // Set current year in footer
+  // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Typing Animation
+  // Typing animation
   const phrases = ["Read markets.", "Follow capital.", "Manage risk.", "Execute with confidence.", "Repeat."];
   let phraseIndex = 0, charIndex = 0, isDeleting = false;
   const typingEl = document.getElementById('typingLine');
 
   function typeEffect() {
-    const currentPhrase = phrases[phraseIndex];
+    const current = phrases[phraseIndex];
     if (!isDeleting) {
-      typingEl.textContent = currentPhrase.substring(0, charIndex + 1);
+      typingEl.textContent = current.substring(0, charIndex + 1);
       charIndex++;
-      if (charIndex === currentPhrase.length) {
+      if (charIndex === current.length) {
         isDeleting = true;
         setTimeout(typeEffect, 2000);
         return;
       }
       setTimeout(typeEffect, 70);
     } else {
-      typingEl.textContent = currentPhrase.substring(0, charIndex - 1);
+      typingEl.textContent = current.substring(0, charIndex - 1);
       charIndex--;
       if (charIndex === 0) {
         isDeleting = false;
@@ -32,7 +32,7 @@
   }
   setTimeout(typeEffect, 800);
 
-  // COUNTER – target 50 (not 57)
+  // Counter scroll trigger (target 50)
   const counterBox = document.getElementById('counterSection');
   const counterEl = document.getElementById('subscriberCounter');
   let counterStarted = false;
@@ -61,23 +61,39 @@
     observer.observe(counterBox);
   }
 
-  // Buy Button Logic (Instagram DM + Copy Message)
+  // Buy button: copy message, open Instagram, show notification
   const buyBtn = document.getElementById('buyBookBtn');
   if (buyBtn) {
-    buyBtn.addEventListener('click', function() {
-      const msg = "Hi, I want to get this book so I can join the next batch of students.";
-      navigator.clipboard.writeText(msg).then(() => {
-        const igUrl = "https://www.instagram.com/emmanuelsilaskelechi?igsh=b282cGxsa3d3Zjgy&utm_source=qr";
-        window.open(igUrl, '_blank');
+    buyBtn.addEventListener('click', () => {
+      const message = "Hi, I'd like to join the free batch. Please guide me on purchasing the book.";
+      navigator.clipboard.writeText(message).then(() => {
+        // Show a small non-intrusive notification
+        const toast = document.createElement('div');
+        toast.textContent = '✓ Message copied. Paste it in Instagram DM.';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '80px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.backgroundColor = '#1e3a5f';
+        toast.style.color = '#c0d0e6';
+        toast.style.padding = '10px 20px';
+        toast.style.borderRadius = '40px';
+        toast.style.fontSize = '0.8rem';
+        toast.style.zIndex = '1000';
+        toast.style.border = '1px solid #5a8bc9';
+        toast.style.backdropFilter = 'blur(8px)';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
       }).catch(() => {
-        const igUrl = "https://www.instagram.com/emmanuelsilaskelechi?igsh=b282cGxsa3d3Zjgy&utm_source=qr";
-        window.open(igUrl, '_blank');
-        alert("Please send this message: \n\n" + msg);
+        // Fallback if clipboard fails
+        alert("Please copy this message:\n\n" + message);
       });
+      // Open Instagram profile
+      window.open("https://www.instagram.com/emmanuelsilaskelechi?igsh=b282cGxsa3d3Zjgy&utm_source=qr", "_blank");
     });
   }
 
-  // Lecture List + Watch & Assignment Buttons
+  // Lectures data
   const lectures = [
     { title: 'Market Structure & Bias', videoId: 'RraPVl3lPg0' },
     { title: 'Timing the Session', videoId: 'bI4NIjkAC34' },
@@ -89,7 +105,7 @@
 
   const container = document.getElementById('lectureList');
   if (container) {
-    container.innerHTML = lectures.map((l) => `
+    container.innerHTML = lectures.map(l => `
       <div class="lecture-item">
         <div>
           <div class="lecture-title">${l.title}</div>
@@ -121,16 +137,4 @@
       }
     });
   }
-
-  // Section Reveal Observer
-  const hiddenEls = document.querySelectorAll('.section-hidden');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('section-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  hiddenEls.forEach(el => observer.observe(el));
 })();
