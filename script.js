@@ -1,4 +1,5 @@
 (function() {
+  // Set current year in footer
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Typing Animation
@@ -31,7 +32,7 @@
   }
   setTimeout(typeEffect, 800);
 
-  // COUNTER – Only starts when you scroll to the section
+  // COUNTER – target 50 (not 57)
   const counterBox = document.getElementById('counterSection');
   const counterEl = document.getElementById('subscriberCounter');
   let counterStarted = false;
@@ -47,13 +48,13 @@
           const timer = setInterval(() => {
             current += step;
             if (current >= target) {
-              counterEl.textContent = '57+';
+              counterEl.textContent = '50+';
               clearInterval(timer);
             } else {
               counterEl.textContent = current;
             }
           }, 50);
-          observer.disconnect(); // Stop observing once started
+          observer.disconnect();
         }
       });
     }, { threshold: 0.2 });
@@ -132,4 +133,4 @@
     });
   }, { threshold: 0.2 });
   hiddenEls.forEach(el => observer.observe(el));
-})()
+})();
