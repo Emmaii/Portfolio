@@ -1,146 +1,102 @@
-(function() {
-  // Set current year in footer
-  document.getElementById('year').textContent = new Date().getFullYear();
+// Set current year in footer
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Typing animation
-  const phrases = ["Read markets.", "Follow capital.", "Manage risk.", "Build process.", "Get certified."];
-  let phraseIdx = 0, charIdx = 0, deleting = false;
-  const typingEl = document.getElementById('typingLine');
-  function typeEffect() {
-    const current = phrases[phraseIdx];
-    if (!deleting) {
-      typingEl.textContent = current.substring(0, charIdx + 1);
-      charIdx++;
-      if (charIdx === current.length) {
-        deleting = true;
-        setTimeout(typeEffect, 2000);
-        return;
-      }
-      setTimeout(typeEffect, 70);
-    } else {
-      typingEl.textContent = current.substring(0, charIdx - 1);
-      charIdx--;
-      if (charIdx === 0) {
-        deleting = false;
-        phraseIdx = (phraseIdx + 1) % phrases.length;
-        setTimeout(typeEffect, 300);
-        return;
-      }
-      setTimeout(typeEffect, 40);
-    }
+// Sample data: titles, excerpts, and full article content (polished versions)
+const samples = [
+  {
+    title: "Why Financial Literacy Matters More Than Ever in 2026",
+    excerpt: "Let me ask you something. When was the last time you felt completely confident about a financial decision...",
+    content: `
+      <h1>Why Financial Literacy Matters More Than Ever in 2026</h1>
+      <p>Let me ask you something. When was the last time you felt completely confident about a financial decision—without second-guessing yourself afterward?</p>
+      <p>For most people, that feeling is rare. And in 2026, it's getting rarer.</p>
+      <p>The financial world isn't what it used to be. Your parents probably had a local bank branch, a pension plan, and maybe a modest stock portfolio. That was it. Today? You've got digital-only banks, crypto exchanges, AI-powered robo-advisors, buy-now-pay-later loans, and about a dozen investing apps on your phone. Each one promises to make you richer. Each one also comes with fine print that could cost you.</p>
+      <p>Here's the problem: more access doesn't mean more understanding. Millions of people are earning, spending, and saving—but they're doing it without a clear map...</p>
+      <p>[Full article continues — this is a representative excerpt. In a real deployment, include the entire polished piece from our earlier revision.]</p>
+      <p><strong>The bottom line:</strong> Financial literacy won't make you rich overnight. But it will stop you from making the mistakes that keep people poor for decades.</p>
+    `
+  },
+  {
+    title: "The Silent Wealth Builder: Why Compound Interest Is the Most Powerful Force in Personal Finance",
+    excerpt: "Let me tell you about two people. Neither is a genius. Neither got lucky...",
+    content: `
+      <h1>The Silent Wealth Builder: Why Compound Interest Is the Most Powerful Force in Personal Finance</h1>
+      <p>Let me tell you about two people. Neither is a genius. Neither got lucky.</p>
+      <p>Meet Maya. She's 22, just landed her first full-time job, and starts investing $150 a month. Nothing fancy—just a basic index fund. She does this for 10 years, then stops completely. Total invested: $18,000.</p>
+      <p>Now meet Jake. He doesn't think about investing in his 20s. Too busy. Too broke. At 32, he gets serious and invests $300 a month—double what Maya put in. He keeps going for 30 years, all the way to 62. Total invested: $108,000.</p>
+      <p>Who ends up with more money? Maya. At age 62, she has roughly $1.2 million. Jake has about $850,000. She invested less. Stopped earlier. Still won by over $350,000.</p>
+      <p>That's not magic. That's compound interest.</p>
+      <p>[Full article continues with practical steps, debt warning, and the Maya vs. Jake story fully detailed.]</p>
+    `
+  },
+  {
+    title: "How ETFs Changed Investing Forever",
+    excerpt: "Here's a confession: I used to think investing was for other people...",
+    content: `
+      <h1>How ETFs Changed Investing Forever</h1>
+      <p>Here's a confession: I used to think investing was for other people. You know the type. Spreadsheets. Wall Street jargon. Enough money to buy a small house before you could even get started.</p>
+      <p>Then I discovered ETFs. And everything changed. Not because I got smarter. Because someone finally made investing simple.</p>
+      <p>An ETF is stupidly simple. Instead of buying 500 stocks one by one, you buy one thing. That one thing owns all 500. You get the diversification without the headache. You can buy or sell it anytime the market is open—just like a regular stock.</p>
+      <p>[Full article explains the old way, cost savings, risks, and why ETFs democratized investing.]</p>
+    `
   }
-  setTimeout(typeEffect, 600);
+];
 
-  // Counter animation (active participants)
-  const counterNum = document.getElementById('subscriberCounter');
-  if (counterNum && !window.counterTriggered) {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !window.counterTriggered) {
-        window.counterTriggered = true;
-        let curr = 0;
-        const target = 87;
-        const step = Math.ceil(target / 45);
-        const timer = setInterval(() => {
-          curr += step;
-          if (curr >= target) {
-            counterNum.textContent = '87+';
-            clearInterval(timer);
-          } else {
-            counterNum.textContent = curr;
-          }
-        }, 50);
-        observer.disconnect();
-      }
-    }, { threshold: 0.2 });
-    const counterSection = document.getElementById('counterSection');
-    if (counterSection) observer.observe(counterSection);
-  }
+// Generate sample cards
+const grid = document.getElementById('samplesGrid');
+if (grid) {
+  samples.forEach((sample, idx) => {
+    const card = document.createElement('div');
+    card.className = 'sample-card';
+    card.innerHTML = `
+      <h3>${sample.title}</h3>
+      <div class="sample-meta">Sample • Finance writing</div>
+      <p>${sample.excerpt.substring(0, 120)}…</p>
+      <button class="read-btn" data-idx="${idx}">Read full sample →</button>
+    `;
+    grid.appendChild(card);
+  });
 
-  // Price countdown animation for book (from 100,000 to 13,000)
-  const priceEl = document.getElementById('animatedPrice');
-  let priceAnimated = false;
-  if (priceEl) {
-    const priceObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !priceAnimated) {
-        priceAnimated = true;
-        let start = 100000, end = 13000, duration = 1500;
-        let startTime = null;
-        function animatePrice(now) {
-          if (!startTime) startTime = now;
-          const elapsed = now - startTime;
-          let progress = Math.min(1, elapsed / duration);
-          let currentVal = start - (start - end) * progress;
-          if (progress >= 1) priceEl.textContent = '13,000 NGN';
-          else priceEl.textContent = Math.floor(currentVal).toLocaleString() + ' NGN';
-          if (progress < 1) requestAnimationFrame(animatePrice);
-        }
-        requestAnimationFrame(animatePrice);
-        priceObserver.disconnect();
-      }
-    }, { threshold: 0.3 });
-    priceObserver.observe(priceEl);
+  // Modal logic
+  const modal = document.getElementById('modal');
+  const modalBody = document.getElementById('modal-body');
+  const closeModal = document.querySelector('.modal-close');
+
+  function openModal(content) {
+    modalBody.innerHTML = content;
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
   }
 
-  // Helper: copy message and open Instagram DM
-  function contactInstagram(message, customUrl = 'https://www.instagram.com/emmanuelsilaskelechi?igsh=b282cGxsa3d3Zjgy&utm_source=qr') {
-    navigator.clipboard.writeText(message).then(() => {
-      const toast = document.createElement('div');
-      toast.textContent = '✓ Message copied. Paste it in Instagram DM.';
-      toast.style.cssText = 'position:fixed; bottom:90px; left:50%; transform:translateX(-50%); background:#1e3a5f; color:#c0d0e6; padding:8px 18px; border-radius:60px; font-size:0.75rem; z-index:1100; border:1px solid #5a8bc9; backdrop-filter:blur(6px); white-space:nowrap;';
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
-    }).catch(() => alert("Copy this message:\n" + message));
-    window.open(customUrl, '_blank');
+  function closeModalFunc() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
   }
 
-  // Book purchase + batch enrollment buttons
-  document.getElementById('buyBookBtn')?.addEventListener('click', () => contactInstagram("Hi, I'd like to purchase the LabRoom Institutional Trading Framework book (13,000 NGN). Please guide me on payment & batch access."));
-  document.getElementById('freeBatchBtn')?.addEventListener('click', () => contactInstagram("Hi, I'm interested in the free Student Batch. How can I join?"));
-  document.getElementById('enrollAcademy')?.addEventListener('click', () => contactInstagram("Hello, I want to enroll in LabRoom Academy & batch. Please share steps."));
-  
-  // Certification exam buttons
-  const examHandler = () => contactInstagram("Hello, I'm interested in the LRCMA Certification exam (₦3,000). Please provide registration & payment details.");
-  document.getElementById('certExamBtn')?.addEventListener('click', examHandler);
-  document.getElementById('certCTA')?.addEventListener('click', examHandler);
-  
-  // Legacy enroll buttons (if any exist from previous markup)
-  const oldEnroll = document.getElementById('enrollBtn');
-  if (oldEnroll) oldEnroll.addEventListener('click', () => contactInstagram("Hi, I'd like to join the free batch. Please guide me on purchasing the book."));
-  const enrollBtn2 = document.getElementById('enrollBtn2');
-  if (enrollBtn2) enrollBtn2.addEventListener('click', () => contactInstagram("Hi, I'd like to join the free batch. Please guide me on purchasing the book."));
+  closeModal.addEventListener('click', closeModalFunc);
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) closeModalFunc();
+  });
 
-  // Free educational lectures (Gold technicals)
-  const lectures = [
-    { title: 'Market Structure & Bias', videoId: 'RraPVl3lPg0' },
-    { title: 'Timing the Session', videoId: 'bI4NIjkAC34' },
-    { title: 'Points of Interest', videoId: '7rDJikdlBwY' },
-    { title: 'Setup to Risk', videoId: '-wHaZyAtZ6M' },
-    { title: 'Framework Together', videoId: 'q0Pbg85AHQU' },
-    { title: 'Live Reversal Example', videoId: 'CICleAnoMXE' }
-  ];
-  const container = document.getElementById('lectureList');
-  if (container) {
-    container.innerHTML = lectures.map(l => `
-      <div class="lecture-item">
-        <div><div class="lecture-title" style="font-weight:500;">${l.title}</div><div class="lecture-meta" style="font-size:0.7rem;">Gold Technicals | Free Lesson</div></div>
-        <div class="lecture-actions"><button class="btn-assignment" data-title="${l.title}">Assignment</button><button class="btn-watch" data-video="${l.videoId}">Watch</button></div>
-      </div>
-    `).join('');
-    container.addEventListener('click', (e) => {
-      if (e.target.classList.contains('btn-watch')) {
-        window.open(`https://www.youtube.com/watch?v=${e.target.dataset.video}`, '_blank');
-      }
-      if (e.target.classList.contains('btn-assignment')) {
-        const title = e.target.dataset.title;
-        const content = `LabRoom – Gold Technicals Assignment\nTopic: ${title}\n\nTask:\n1. Identify main trend on XAUUSD (Daily).\n2. Mark support & resistance.\n3. Write one-sentence bias based on structure.\nSubmit in LabRoom batch.`;
-        const blob = new Blob([content], {type: 'text/plain'});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${title.replace(/\s/g, '_')}_Assignment.txt`;
-        a.click();
-        URL.revokeObjectURL(url);
+  document.querySelectorAll('.read-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const idx = btn.getAttribute('data-idx');
+      if (idx !== null && samples[idx]) {
+        openModal(samples[idx].content);
       }
     });
-  }
-})();
+  });
+}
+
+// Optional: smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    const target = document.querySelector(targetId);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
