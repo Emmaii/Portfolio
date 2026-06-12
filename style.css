@@ -73,6 +73,7 @@ body {
 .hero {
   padding: 80px 0 60px;
   border-bottom: 1px solid #f0f2f4;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
 }
 
 .hero-container {
@@ -98,6 +99,38 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+/* Typing Animation */
+.typing-wrapper {
+  font-size: 1.3rem;
+  margin-bottom: 32px;
+  color: #2c3e4e;
+  font-weight: 500;
+  min-height: 3rem;
+}
+
+.typing-prefix {
+  display: inline-block;
+}
+
+.typing-text {
+  display: inline-block;
+  min-width: 200px;
+  text-align: left;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  margin-left: 4px;
+  animation: blink 0.8s infinite;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero-description {
@@ -150,7 +183,8 @@ h1 {
 
 .btn-primary:hover {
   background: #0f1e28;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .btn-secondary {
@@ -162,6 +196,7 @@ h1 {
 .btn-secondary:hover {
   border-color: #1e2f3c;
   background: #f8fafc;
+  transform: translateY(-2px);
 }
 
 .btn-outline {
@@ -173,11 +208,13 @@ h1 {
   font-weight: 500;
   text-decoration: none;
   display: inline-block;
+  transition: all 0.2s;
 }
 
 .btn-outline:hover {
   background: #1e2f3c;
   color: white;
+  transform: translateY(-2px);
 }
 
 /* Section common */
@@ -206,7 +243,7 @@ h1 {
 /* Samples grid */
 .samples-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 32px;
 }
 
@@ -217,12 +254,13 @@ h1 {
   padding: 28px;
   transition: all 0.25s;
   box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  cursor: pointer;
 }
 
 .sample-card:hover {
   border-color: #cbd5e1;
-  box-shadow: 0 12px 24px -12px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -12px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
 }
 
 .sample-card h3 {
@@ -307,6 +345,7 @@ h1 {
   margin-bottom: 32px;
   font-size: 0.85rem;
   color: #5f6e7a;
+  flex-wrap: wrap;
 }
 
 /* Contact */
@@ -334,71 +373,13 @@ h1 {
   color: #1e3a5f;
   border-bottom: 1px dotted #b9c8da;
   padding-bottom: 2px;
+  transition: all 0.2s;
 }
 
 .contact-item:hover {
   color: #0a1a2f;
   border-bottom-color: #0a1a2f;
-}
-
-.contact-note {
-  font-size: 0.85rem;
-  color: #5f6e7a;
-}
-
-.contact-note a {
-  color: #1e3a5f;
-}
-
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.8);
-  overflow-y: auto;
-}
-
-.modal-content {
-  background: #fff;
-  margin: 40px auto;
-  max-width: 800px;
-  width: 90%;
-  border-radius: 28px;
-  padding: 32px;
-  position: relative;
-  color: #111;
-}
-
-.modal-close {
-  position: absolute;
-  right: 24px;
-  top: 20px;
-  font-size: 28px;
-  font-weight: 300;
-  cursor: pointer;
-  color: #7f8c8d;
-}
-
-.modal-close:hover {
-  color: #000;
-}
-
-#modal-body {
-  line-height: 1.6;
-}
-
-#modal-body h1, #modal-body h2 {
-  margin: 1.2em 0 0.5em;
-}
-
-#modal-body p {
-  margin-bottom: 1em;
-  color: #1f2c38;
+  transform: translateY(-1px);
 }
 
 /* Footer */
@@ -435,8 +416,7 @@ h1 {
   .samples-grid {
     grid-template-columns: 1fr;
   }
-  .modal-content {
-    padding: 20px;
-    margin: 20px auto;
+  .typing-wrapper {
+    font-size: 1rem;
   }
 }
